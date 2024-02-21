@@ -29,7 +29,7 @@ class ListGroupAdapter(group: MutableList<Group>): RecyclerView.Adapter<ListGrou
 
         fun bindItem(group: Group){
             this.group = group
-            item.listItemYearTextView.text = group.year
+            item.listItemYearTextView.text = group.year.toString()
             item.listItemYearEndTextView.text =group.name
             item.root.setOnClickListener(this)
 

@@ -1,5 +1,6 @@
 package ru.kondrashen.attendanciescoutapp.Presentation.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import org.w3c.dom.Text
 import ru.kondrashen.attendanciescoutapp.Domain.LoginViewModel
 import ru.kondrashen.attendanciescoutapp.Domain.MainViewModel
+import ru.kondrashen.attendanciescoutapp.Presentation.activitys.MainActivity
 import ru.kondrashen.attendanciescoutapp.Presentation.adapters.ListGroupAdapter
 import ru.kondrashen.attendanciescoutapp.R
 import ru.kondrashen.attendanciescoutapp.databinding.FragmentLoginBinding
@@ -24,9 +26,7 @@ class LoginFragment : Fragment() {
     private val dataLogin: LoginViewModel by viewModels()
     private var adapter: ArrayAdapter<String>? = null
     private var rolesName: MutableList<String> = mutableListOf()
-    private var result: LoginResponse = LoginResponse("",0, "")
-
-
+    private var result: LoginResponse = LoginResponse("",0, "", "")
 
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -34,36 +34,28 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        binding.login.setOnClickListener {
 
-            dataLogin.getRolesId(binding.userRole.selectedItem.toString())
-                .observe(requireActivity()) {
-                    val roleId = it
-                    println(" почта: " +binding.etEmail.text.toString() + " пароль: " + binding.etPassword.text.toString() + " "+ roleId.toString())
-                    result = dataLogin.goToAccaunt(UserLog(binding.etEmail.text.toString(), binding.etPassword.text.toString(), roleId))
-                    binding.result.text = result.status
-                }
-
-        }
 
         updateUI()
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.login.setOnClickListener {
 
+            dataLogin.getRolesId(binding.userRole.selectedItem.toString())
+                .observe(requireActivity()) {
+                    val roleId = it
+                    result = dataLogin.goToAccaunt(UserLog(binding.etEmail.text.toString(), binding.etPassword.text.toString(), roleId))
+                    println("Вот: $result")
+                    binding.result.text = result.status
+                    if (result.status == "Вы успешно вошли в систему!") {
+                        val intent = MainActivity.newIntent(requireActivity())
+                        startActivity(intent)
+                    }
+                }
 
-////            dataLogin.getRolesFromRoom()
-//            UserLog(
-//                binding.etEmail.toString(),
-//                binding.etPassword.toString(),
-//                id
-//            )
-
-//            dataLogin.goToAccaunt()
-//        }
-
-
+        }
         binding.losePass.setOnClickListener{
 
         }
@@ -72,6 +64,7 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
     private fun updateUI(){
 //        rolesName = mutableListOf("админ", "препод")
         dataLogin.getRolesFromRoom().observe(requireActivity()){

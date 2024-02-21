@@ -77,13 +77,11 @@ class FirstGroupFragment : Fragment() {
                 dataGroup.getGroupsOServ().observe(requireActivity()){
                     groups = it as MutableList<Group>
                     adapter = ListGroupAdapter(groups)
-                    binding.listGroup.adapter = adapter
                 }
             }
             adapter = ListGroupAdapter(groups)
             binding.listGroup.adapter = adapter
         }
-
     }
 
 //    private fun loadData(){

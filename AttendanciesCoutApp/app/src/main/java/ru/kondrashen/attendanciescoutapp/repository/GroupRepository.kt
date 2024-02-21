@@ -17,12 +17,12 @@ class GroupRepository(private val groupDAO: GroupDAO): CoroutineScope {
     private val groupZ: LiveData<List<Group>> = groupDAO.getGroupsZ()
     private val groupOZ: LiveData<List<Group>> = groupDAO.getGroupsOZ()
 
-    fun getGroupsOData(): LiveData<List<Group>> {
-        getDataFromServer()
+    fun getGroupsOData(token: String?): LiveData<List<Group>> {
+        getDataFromServer(token)
         return groupO
     }
-    fun getGroupsZData(): LiveData<List<Group>> {
-        getDataFromServer()
+    fun getGroupsZData(token: String?): LiveData<List<Group>> {
+        getDataFromServer(token)
         return groupZ
     }
 
@@ -30,13 +30,23 @@ class GroupRepository(private val groupDAO: GroupDAO): CoroutineScope {
     private val job = SupervisorJob()
     override val coroutineContext: CoroutineContext
         get() = job
-    private fun getDataFromServer() {
+    private fun getDataFromServer(token: String?) {
         launch(Dispatchers.IO) {
-            val resp = groupsAPI.getGroupsAsync() as MutableList<Group>
+            val resultToken = "Bearer $token"
+            val resp = groupsAPI.getGroupsAuth(resultToken, 1) as MutableList<Group>
             println(resp)
             for (i in resp)
                 groupDAO.addGroups(i)
             }
     }
+//    private fun getDataFromServer(token: String?) {
+//        launch(Dispatchers.IO) {
+//            val resp = groupsAPI.getGroupsAsync() as MutableList<Group>
+//            println(resp)
+//            for (i in resp)
+//                groupDAO.addGroups(i)
+//        }
+//    }
+
 
 }

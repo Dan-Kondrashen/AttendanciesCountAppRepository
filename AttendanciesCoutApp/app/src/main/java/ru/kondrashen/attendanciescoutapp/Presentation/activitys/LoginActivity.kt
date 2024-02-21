@@ -1,5 +1,6 @@
 package ru.kondrashen.attendanciescoutapp.Presentation.activitys
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -14,6 +15,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainlogBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPref = getSharedPreferences("AuthPref", Context.MODE_PRIVATE)
         binding = ActivityMainlogBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val fm = supportFragmentManager.beginTransaction()

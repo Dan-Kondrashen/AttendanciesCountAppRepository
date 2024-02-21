@@ -7,6 +7,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import ru.kondrashen.attendanciescoutapp.repository.data_class.Group
+import ru.kondrashen.attendanciescoutapp.repository.data_class.relations.GroupWithStudents
+
 //import ru.kondrashen.attendanciescoutapp.repository.data_class.Student
 //import ru.kondrashen.attendanciescoutapp.repository.data_class.relations.GroupWithStudents
 
@@ -26,7 +28,11 @@ interface GroupDAO {
 
     @Query("SELECT * FROM group_table WHERE type = 3 ORDER BY name DESC")
     fun getGroupsOZ(): LiveData<List<Group>>
+
+    @Query("SELECT * FROM group_table WHERE id = :id")
+    fun getStudentOfGroup(id: Int): LiveData<List<GroupWithStudents>>
 }
+
 
 
 

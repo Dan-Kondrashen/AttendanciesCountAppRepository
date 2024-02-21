@@ -2,6 +2,7 @@ package ru.kondrashen.attendanciescoutapp.Domain
 
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import ru.kondrashen.attendanciescoutapp.repository.GroupRepository
@@ -25,6 +26,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private var groupO: LiveData<List<Group>>
     private var groupZ: LiveData<List<Group>>
     private var groupOZ: LiveData<List<Group>>
+    val pref = application.getSharedPreferences("AuthPref", Context.MODE_PRIVATE)
+
 
     init {
         val groupDAO = AttendanciesDatabase.getDatabase(application).groupDao()
@@ -35,6 +38,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun getGroupsO(): LiveData<List<Group>> {
+//        println("Вот оно: ${pref.getString("token", null)}")
         return groupO
     }
 
@@ -46,12 +50,14 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun getGroupsOServ(): LiveData<List<Group>>{
-        groupO = grRepository.getGroupsOData()
+        val token = pref.getString("token", null)
+        groupO = grRepository.getGroupsOData(token)
         return groupO
     }
 
     fun getGroupsZServ(): LiveData<List<Group>>{
-        groupZ = grRepository.getGroupsZData()
+        val token = pref.getString("token", null)
+        groupZ = grRepository.getGroupsZData(token)
         return groupZ
     }
 }
