@@ -8,8 +8,9 @@ import androidx.room.TypeConverters
 import ru.kondrashen.attendanciescoutapp.repository.converters.DateConverter
 import ru.kondrashen.attendanciescoutapp.repository.dao.GroupDAO
 import ru.kondrashen.attendanciescoutapp.repository.dao.RoleDAO
+import ru.kondrashen.attendanciescoutapp.repository.data_class.relations.SubjectToGroupCrossRef
 
-@Database(entities = [Group::class, Role::class, User::class, Student::class, Attendances::class, Subject::class], version = 1, exportSchema = false)
+@Database(entities = [Group::class, Role::class, User::class, Student::class, Attendances::class, Subject::class, SubjectToGroupCrossRef::class], version = 1, exportSchema = false)
 @TypeConverters(DateConverter::class)
 abstract class AttendanciesDatabase: RoomDatabase() {
     abstract fun groupDao(): GroupDAO

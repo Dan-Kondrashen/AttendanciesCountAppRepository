@@ -21,6 +21,5 @@ class LoginActivity : AppCompatActivity() {
         val fm = supportFragmentManager.beginTransaction()
         fm.add(R.id.login_content, LoginFragment())
         fm.commit()
-
     }
 }

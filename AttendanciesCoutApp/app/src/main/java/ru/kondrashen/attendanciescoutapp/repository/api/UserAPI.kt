@@ -4,7 +4,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-import ru.kondrashen.attendanciescoutapp.repository.data_class.LoginResponse
+import ru.kondrashen.attendanciescoutapp.repository.data_class.responces.LoginResponse
 import ru.kondrashen.attendanciescoutapp.repository.data_class.User
 import ru.kondrashen.attendanciescoutapp.repository.data_class.UserLog
 

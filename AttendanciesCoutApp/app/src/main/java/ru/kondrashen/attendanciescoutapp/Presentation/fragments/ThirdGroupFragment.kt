@@ -56,7 +56,7 @@ class ThirdGroupFragment : Fragment() {
     private fun updateUI(){
         dataGroup.getGroupsOZ().observe(requireActivity()) {
             groups = it as MutableList<Group>
-            adapter = ListGroupAdapter(groups)
+            adapter = ListGroupAdapter(groups, findNavController())
             binding.listGroup.adapter = adapter
         }
 

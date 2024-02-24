@@ -6,23 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import ru.kondrashen.attendanciescoutapp.Domain.MainViewModel
 import ru.kondrashen.attendanciescoutapp.Presentation.adapters.ListGroupAdapter
+import ru.kondrashen.attendanciescoutapp.Presentation.adapters.ListGroupAdapter2
 import ru.kondrashen.attendanciescoutapp.repository.data_class.Group
 import ru.kondrashen.attendanciescoutapp.R
 import ru.kondrashen.attendanciescoutapp.databinding.ListUsersOGroupsBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 class FirstGroupFragment : Fragment() {
 
     private var _binding: ListUsersOGroupsBinding? = null
     private val dataGroup: MainViewModel by viewModels()
     private var groups: MutableList<Group> = mutableListOf()
-    private var adapter: ListGroupAdapter? = null
+    private var adapter: ListGroupAdapter2? = null
     private var isDataLoadFinished: Boolean = false
+
     companion object {
         private const val BUNDLE_DATA = "loadDataFinished"
     }
@@ -34,59 +36,46 @@ class FirstGroupFragment : Fragment() {
         savedInstanceState: Bundle?
 
     ): View {
-        if (savedInstanceState != null) {
-            isDataLoadFinished = savedInstanceState.getBoolean(BUNDLE_DATA, false)
-        }
-
         _binding = ListUsersOGroupsBinding.inflate(inflater, container, false)
-//        if (isDataLoadFinished) {
-//            updateUI()
-//        }
-//        else {
-//            loadData()
-//        }
         updateUI()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val userId = arguments?.getInt("id")
+        binding.infoDop.text = userId.toString()
+        val bundle = Bundle()
+        bundle.putInt("id", userId!!)
         binding.zGroup.setOnClickListener{
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment2)
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment2, bundle)
         }
         binding.ozGroup.setOnClickListener{
-            findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
+            findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment, bundle)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
-    }
 
+    }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putBoolean(BUNDLE_DATA,isDataLoadFinished)
     }
 
     private fun updateUI(){
+        val userId = arguments?.getInt("id")
         dataGroup.getGroupsO().observe(requireActivity()) {
             groups = it as MutableList<Group>
             if(groups.isEmpty()) {
-                dataGroup.getGroupsOServ().observe(requireActivity()){
+                dataGroup.getGroupsOServ(1).observe(requireActivity()){
                     groups = it as MutableList<Group>
-                    adapter = ListGroupAdapter(groups)
+                    adapter = ListGroupAdapter2(groups, userId!!, findNavController())
                 }
             }
-            adapter = ListGroupAdapter(groups)
+            adapter = ListGroupAdapter2(groups, userId!!, findNavController())
             binding.listGroup.adapter = adapter
         }
     }
-
-//    private fun loadData(){
-//        dataGroup.getData()
-//        isDataLoadFinished = true
-//        updateUI()
-//    }
 }

@@ -9,5 +9,4 @@ data class Student (
     var id: Int,
     var FIO: String,
     var groupId: Int,
-
     )

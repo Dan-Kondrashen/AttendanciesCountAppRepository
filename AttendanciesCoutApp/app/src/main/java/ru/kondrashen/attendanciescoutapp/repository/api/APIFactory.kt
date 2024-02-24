@@ -14,4 +14,7 @@ object APIFactory {
     val groupsAPI = retrofit.create(GroupsAPI::class.java)
     val roleAPI = retrofit.create(RoleAPI::class.java)
     val userAPI = retrofit.create(UserAPI::class.java)
+    val studentsAPI = retrofit.create(StudentsAPI::class.java)
+    val subjectsAPI = retrofit.create(SubjectsAPI::class.java)
+    val attendancesAPI = retrofit.create(AttendancesAPI::class.java)
 }

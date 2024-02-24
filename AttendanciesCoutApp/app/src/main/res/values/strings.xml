@@ -16,4 +16,7 @@
     <string name="o_groups">Очная форма обучения</string>
     <string name="z_groups">Заочная форма обучения</string>
     <string name="oz_groups">Очно-заочная форма обучения</string>
+    <string name="student_in">Студенты группы</string>
+    <string name="date_chose">Выбрать дату</string>
+    <string name="add_data">Отправить данные</string>
 </resources>

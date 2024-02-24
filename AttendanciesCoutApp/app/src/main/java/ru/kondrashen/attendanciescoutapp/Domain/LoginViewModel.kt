@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 
 import ru.kondrashen.attendanciescoutapp.repository.AuthRepository
 import ru.kondrashen.attendanciescoutapp.repository.data_class.AttendanciesDatabase
-import ru.kondrashen.attendanciescoutapp.repository.data_class.LoginResponse
+import ru.kondrashen.attendanciescoutapp.repository.data_class.responces.LoginResponse
 import ru.kondrashen.attendanciescoutapp.repository.data_class.UserLog
 
 class LoginViewModel(application: Application): AndroidViewModel(application) {
@@ -38,7 +38,7 @@ class LoginViewModel(application: Application): AndroidViewModel(application) {
         return roleRepository.getRoleId(name)
     }
 
-    fun goToAccaunt(userlog: UserLog): LoginResponse{
+    fun goToAccaunt(userlog: UserLog): LoginResponse {
         response = roleRepository.postLoginData(userlog)
         editor.putString("token", response.accessToken)
         editor.apply()

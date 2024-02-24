@@ -1,6 +1,5 @@
 package ru.kondrashen.attendanciescoutapp.Presentation.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +7,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import org.w3c.dom.Text
 import ru.kondrashen.attendanciescoutapp.Domain.LoginViewModel
-import ru.kondrashen.attendanciescoutapp.Domain.MainViewModel
 import ru.kondrashen.attendanciescoutapp.Presentation.activitys.MainActivity
-import ru.kondrashen.attendanciescoutapp.Presentation.adapters.ListGroupAdapter
 import ru.kondrashen.attendanciescoutapp.R
 import ru.kondrashen.attendanciescoutapp.databinding.FragmentLoginBinding
-import ru.kondrashen.attendanciescoutapp.repository.data_class.LoginResponse
+import ru.kondrashen.attendanciescoutapp.repository.data_class.responces.LoginResponse
 
-import ru.kondrashen.attendanciescoutapp.repository.data_class.Role
 import ru.kondrashen.attendanciescoutapp.repository.data_class.UserLog
 
 class LoginFragment : Fragment() {
@@ -50,7 +44,7 @@ class LoginFragment : Fragment() {
                     println("Вот: $result")
                     binding.result.text = result.status
                     if (result.status == "Вы успешно вошли в систему!") {
-                        val intent = MainActivity.newIntent(requireActivity())
+                        val intent = MainActivity.newIntent(requireActivity(), result.id)
                         startActivity(intent)
                     }
                 }

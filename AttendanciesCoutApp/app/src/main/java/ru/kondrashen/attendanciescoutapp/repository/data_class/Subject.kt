@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 @Entity("subject_table")
 data class Subject (
     @PrimaryKey
-    var id: Int,
+    var subjectId: Int,
     var name: String
 )

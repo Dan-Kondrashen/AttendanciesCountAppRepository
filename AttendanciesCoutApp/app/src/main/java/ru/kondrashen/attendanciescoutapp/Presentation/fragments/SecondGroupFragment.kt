@@ -54,16 +54,11 @@ class SecondGroupFragment : Fragment() {
         _binding = null
     }
     private fun updateUI(){
+
         dataGroup.getGroupsZ().observe(requireActivity()) {
             groups = it as MutableList<Group>
-            if(groups.isEmpty()) {
-                dataGroup.getGroupsZServ().observe(requireActivity()){
-                    groups = it as MutableList<Group>
-                    adapter = ListGroupAdapter(groups)
-                    binding.listGroup.adapter = adapter
-                }
-            }
-            adapter = ListGroupAdapter(groups)
+
+            adapter = ListGroupAdapter(groups, findNavController())
             binding.listGroup.adapter = adapter
         }
 

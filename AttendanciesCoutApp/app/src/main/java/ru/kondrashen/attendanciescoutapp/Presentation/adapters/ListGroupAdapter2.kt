@@ -11,14 +11,14 @@ import ru.kondrashen.attendanciescoutapp.R
 import ru.kondrashen.attendanciescoutapp.repository.data_class.Group
 import ru.kondrashen.attendanciescoutapp.databinding.ListGroupItemBinding
 
-class ListGroupAdapter(group: MutableList<Group>, findNavController: NavController): RecyclerView.Adapter<ListGroupAdapter.ViewHolder>() {
+class ListGroupAdapter2(group: MutableList<Group>, userId: Int, findNavController: NavController): RecyclerView.Adapter<ListGroupAdapter2.ViewHolder>() {
     private var groups: MutableList<Group> = mutableListOf()
     private var navController: NavController
-
+    private var userId: Int = 0
     init {
         this.groups = group
         this.navController = findNavController
-
+        this.userId = userId
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -32,8 +32,6 @@ class ListGroupAdapter(group: MutableList<Group>, findNavController: NavControll
     }
     inner class ViewHolder(private val item: ListGroupItemBinding) : RecyclerView.ViewHolder(item.root), View.OnClickListener{
         private lateinit var group: Group
-
-
         fun bindItem(group: Group){
             this.group = group
             item.listItemGroupIdView.text = group.id.toString()
@@ -44,6 +42,7 @@ class ListGroupAdapter(group: MutableList<Group>, findNavController: NavControll
 
         override fun onClick(v: View?) {
             val bundle = Bundle()
+            bundle.putInt("id", userId)
             bundle.putInt("groupId", item.listItemGroupIdView.text.toString().toInt())
             navController.navigate(R.id.action_FirstFragment_to_StudentFragment, bundle)
 //            println("Нажатие работает: " + item.listItemGroupIdView.text)

@@ -1,7 +1,5 @@
 package ru.kondrashen.attendanciescoutapp.repository
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +9,7 @@ import kotlinx.coroutines.runBlocking
 import ru.kondrashen.attendanciescoutapp.repository.api.APIFactory
 
 import ru.kondrashen.attendanciescoutapp.repository.dao.RoleDAO
-import ru.kondrashen.attendanciescoutapp.repository.data_class.LoginResponse
+import ru.kondrashen.attendanciescoutapp.repository.data_class.responces.LoginResponse
 import ru.kondrashen.attendanciescoutapp.repository.data_class.Role
 import ru.kondrashen.attendanciescoutapp.repository.data_class.UserLog
 import kotlin.coroutines.CoroutineContext
@@ -40,7 +38,7 @@ class AuthRepository(private val roleDAO: RoleDAO): CoroutineScope {
         return roles
     }
 
-    fun postLoginData(userLog: UserLog): LoginResponse{
+    fun postLoginData(userLog: UserLog): LoginResponse {
         runBlocking {
             response = userAPI.postLoginDataAsync(userLog)
             println(response)
