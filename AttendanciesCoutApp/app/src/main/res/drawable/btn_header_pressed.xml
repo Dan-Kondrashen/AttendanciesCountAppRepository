@@ -9,8 +9,8 @@
                     android:paddingBottom="5dp"
                     android:shape="rectangle" >
 
-                    <gradient android:startColor="@color/colorPrimary"
-                        android:endColor="@color/colorPrimaryDark" android:type="radial"
+                    <gradient android:startColor="?colorPrimaryDark"
+                        android:endColor="?colorPrimaryUltraDark" android:type="radial"
                         android:gradientRadius="250dp"/>
 
                     <corners

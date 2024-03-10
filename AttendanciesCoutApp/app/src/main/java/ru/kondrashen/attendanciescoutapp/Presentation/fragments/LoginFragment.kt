@@ -28,15 +28,13 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-
-
         updateUI()
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.login.setOnClickListener {
-
+            dataLogin.clearDatabase()
             dataLogin.getRolesId(binding.userRole.selectedItem.toString())
                 .observe(requireActivity()) {
                     val roleId = it
@@ -44,7 +42,7 @@ class LoginFragment : Fragment() {
                     println("Вот: $result")
                     binding.result.text = result.status
                     if (result.status == "Вы успешно вошли в систему!") {
-                        val intent = MainActivity.newIntent(requireActivity(), result.id)
+                        val intent = MainActivity.newIntent(requireActivity(), result.id, binding.userRole.selectedItem.toString())
                         startActivity(intent)
                     }
                 }
@@ -60,7 +58,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun updateUI(){
-//        rolesName = mutableListOf("админ", "препод")
         dataLogin.getRolesFromRoom().observe(requireActivity()){
             rolesName = it as MutableList<String>
             if (rolesName.isEmpty()) {

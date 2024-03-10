@@ -44,9 +44,10 @@ class FirstGroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val userId = arguments?.getInt("id")
-        binding.infoDop.text = userId.toString()
+//        binding.infoDop.text = userId.toString()
         val bundle = Bundle()
         bundle.putInt("id", userId!!)
+        println("id1 $userId")
         binding.zGroup.setOnClickListener{
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment2, bundle)
         }
@@ -69,7 +70,7 @@ class FirstGroupFragment : Fragment() {
         dataGroup.getGroupsO().observe(requireActivity()) {
             groups = it as MutableList<Group>
             if(groups.isEmpty()) {
-                dataGroup.getGroupsOServ(1).observe(requireActivity()){
+                dataGroup.getGroupsOServ(userId!!).observe(requireActivity()){
                     groups = it as MutableList<Group>
                     adapter = ListGroupAdapter2(groups, userId!!, findNavController())
                 }

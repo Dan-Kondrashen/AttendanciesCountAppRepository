@@ -10,8 +10,8 @@ import ru.kondrashen.attendanciescoutapp.repository.data_class.relations.Subject
 
 interface GroupsAPI {
 
-    @GET("groups")
-    suspend fun getGroupsAsync(): List<Group>
+//    @GET("groups")
+//    suspend fun getGroupsAsync(): List<Group>
     @Headers("Content-Type: application/json")
     @GET("users/{user_id}/groups")
     suspend fun getGroupsAuth(@Header("Authorization") token: String, @Path("user_id") uid: Int): List<Group>
@@ -21,7 +21,8 @@ interface GroupsAPI {
     @Headers("Content-Type: application/json")
     @GET("users/{user_id}/groups/{group_id}")
     suspend fun getGroupStudentsAuth(@Header("Authorization") token: String, @Path("group_id") gid: Int, @Path("user_id") uid: Int): List<Student>
-
+    @GET("groups")
+    suspend fun getAllGroupsAuth(@Header("token")token: String): List<Group>
     @GET("groups/{group_id}")
     suspend fun getGroupAsync(@Path("group_id") id: Int): Group
 

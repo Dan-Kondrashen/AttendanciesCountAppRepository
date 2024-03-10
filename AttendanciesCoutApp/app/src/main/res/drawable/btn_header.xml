@@ -10,8 +10,8 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:shape="rectangle" >
-                    <gradient android:startColor="@color/button_clicked_start"
-                        android:endColor="@color/button_clicked_end" android:type="radial"
+                    <gradient android:startColor="?colorPrimary"
+                        android:endColor="?colorPrimaryDark" android:type="radial"
                         android:gradientRadius="250dp"/>
 
                     <corners
@@ -29,8 +29,8 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:shape="rectangle" >
-                    <gradient android:startColor="@color/button_unpressed_start"
-                        android:endColor="@color/button_unpressed_end" android:type="radial"
+                    <gradient android:startColor="?colorPrimaryLight"
+                        android:endColor="?colorPrimary" android:type="radial"
                         android:gradientRadius="250dp"/>
 
                     <corners
@@ -53,8 +53,8 @@
                     android:paddingBottom="5dp"
                     android:shape="rectangle" >
 
-                    <gradient android:startColor="@color/colorPrimary"
-                        android:endColor="@color/colorPrimaryDark" android:type="radial"
+                    <gradient android:startColor="?colorPrimaryDark"
+                        android:endColor="?colorPrimaryUltraDark" android:type="radial"
                         android:gradientRadius="250dp"/>
 
                     <corners
@@ -73,8 +73,8 @@
                     android:paddingBottom="5dp"
                     android:shape="rectangle" >
 
-                    <gradient android:startColor="@color/button_clicked_start"
-                        android:endColor="@color/button_clicked_end" android:type="radial"
+                    <gradient android:startColor="?colorPrimary"
+                        android:endColor="?colorPrimaryDark" android:type="radial"
                         android:gradientRadius="250dp"/>
 
                     <corners

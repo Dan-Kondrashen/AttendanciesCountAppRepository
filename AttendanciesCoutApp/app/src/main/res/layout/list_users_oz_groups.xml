@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:id="@+id/heder_buttons"
+        android:id="@+id/header_buttons"
         >
 
         <Button
@@ -47,7 +47,7 @@
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_below="@+id/heder_buttons"/>
+        android:layout_below="@+id/header_buttons"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"

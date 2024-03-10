@@ -22,9 +22,11 @@ class MainActivity : AppCompatActivity() {
     private val dataModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     companion object {
-        fun newIntent(context: Context?, id: Int): Intent {
+        fun newIntent(context: Context?, id: Int, type: String): Intent {
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra("id", id)
+            intent.putExtra("type", type)
+
             return intent
         }
     }
@@ -34,13 +36,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        supportActionBar!!.setIcon(R.mipmap.icon_app)
         val id = intent.getIntExtra("id", 0)
+        val type = intent.getStringExtra("type")
         println("Вот id в активности $id")
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         val bundle = Bundle()
         bundle.putInt("id", id)
-
-        navController.setGraph(R.navigation.nav_groups_graph,bundle)
+        if (type == "Работник деканата"){
+            navController.setGraph(R.navigation.nav_graph,bundle)
+        }
+        else{
+            navController.setGraph(R.navigation.nav_groups_graph,bundle)
+        }
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
     }

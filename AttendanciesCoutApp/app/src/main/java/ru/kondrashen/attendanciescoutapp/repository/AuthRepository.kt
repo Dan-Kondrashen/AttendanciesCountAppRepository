@@ -33,6 +33,12 @@ class AuthRepository(private val roleDAO: RoleDAO): CoroutineScope {
         return roleDAO.getRoleId(name)
     }
 
+    fun clearUserData(){
+        runBlocking(Dispatchers.IO) {
+            roleDAO.deleteAllData()
+        }
+    }
+
     fun getAllRolesName(): LiveData<List<String>> {
         getDataFromServer()
         return roles

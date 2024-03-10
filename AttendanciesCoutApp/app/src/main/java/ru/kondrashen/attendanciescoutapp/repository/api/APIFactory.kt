@@ -8,7 +8,7 @@ import retrofit2.create
 object APIFactory {
     private val gsonBuilder = GsonBuilder()
     private var retrofit = Retrofit.Builder()
-        .baseUrl("https://attendanciescount.serveo.net/")
+        .baseUrl("https://attendanciescounts.serveo.net/")
         .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
         .build()
     val groupsAPI = retrofit.create(GroupsAPI::class.java)
