@@ -3,10 +3,10 @@ package ru.kondrashen.attendanciescoutapp.repository.data_class
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "student_table")
-data class Student (
+
+@Entity("subject_table")
+data class Subject (
     @PrimaryKey
-    var id: Int,
-    var FIO: String,
-    var groupId: Int,
-    )
+    var subjectId: Int,
+    var name: String
+)

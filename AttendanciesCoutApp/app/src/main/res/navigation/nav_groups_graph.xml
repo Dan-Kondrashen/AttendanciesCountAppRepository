@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress NavigationFile -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +15,12 @@
         <action
             android:id="@+id/action_FirstFragment_to_ThirdFragment"
             app:destination="@id/ThirdFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_StudentFragment"
+            app:destination="@id/StudentFragment" />
+        <argument android:name="id"
+            app:argType="integer"/>
+
     </fragment>
     <fragment android:id="@+id/SecondFragment"
         android:name="ru.kondrashen.attendanciescoutapp.Presentation.fragments.SecondGroupFragment"
@@ -24,6 +31,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment2"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_StudentFragment"
+            app:destination="@id/StudentFragment" />
 
     </fragment>
     <fragment android:id="@+id/ThirdFragment"
@@ -36,6 +46,17 @@
         <action
             android:id="@+id/action_ThirdFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_ThirdFragment_to_StudentFragment"
+            app:destination="@id/StudentFragment" />
     </fragment>
-
+    <fragment android:id="@+id/StudentFragment"
+        android:name="ru.kondrashen.attendanciescoutapp.Presentation.fragments.StudentsListFragment"
+        tools:layout="@layout/list_students_in_group">
+        <argument android:name="id"
+            app:argType="integer"/>
+        <argument
+            android:name="groupId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

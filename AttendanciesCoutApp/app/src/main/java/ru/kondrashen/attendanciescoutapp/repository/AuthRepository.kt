@@ -9,13 +9,12 @@ import kotlinx.coroutines.runBlocking
 import ru.kondrashen.attendanciescoutapp.repository.api.APIFactory
 
 import ru.kondrashen.attendanciescoutapp.repository.dao.RoleDAO
-import ru.kondrashen.attendanciescoutapp.repository.data_class.Group
-import ru.kondrashen.attendanciescoutapp.repository.data_class.LoginResponse
+import ru.kondrashen.attendanciescoutapp.repository.data_class.responces.LoginResponse
 import ru.kondrashen.attendanciescoutapp.repository.data_class.Role
 import ru.kondrashen.attendanciescoutapp.repository.data_class.UserLog
 import kotlin.coroutines.CoroutineContext
 
-class RoleRepository(private val roleDAO: RoleDAO): CoroutineScope {
+class AuthRepository(private val roleDAO: RoleDAO): CoroutineScope {
     private val roleAPI = APIFactory.roleAPI
     private val userAPI = APIFactory.userAPI
     private lateinit var response: LoginResponse
@@ -26,7 +25,6 @@ class RoleRepository(private val roleDAO: RoleDAO): CoroutineScope {
     private fun getDataFromServer() {
         launch(Dispatchers.IO) {
             val resp = roleAPI.getRolesAsync() as MutableList<Role>
-            println(resp)
             for (i in resp)
                 roleDAO.addRole(i)
         }
@@ -40,7 +38,7 @@ class RoleRepository(private val roleDAO: RoleDAO): CoroutineScope {
         return roles
     }
 
-    fun postLoginData(userLog: UserLog): LoginResponse{
+    fun postLoginData(userLog: UserLog): LoginResponse {
         runBlocking {
             response = userAPI.postLoginDataAsync(userLog)
             println(response)

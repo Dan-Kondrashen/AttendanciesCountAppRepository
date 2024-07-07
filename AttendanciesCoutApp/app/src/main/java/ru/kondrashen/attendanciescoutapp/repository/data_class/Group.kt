@@ -6,10 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "group_table")
 data class Group(
-    @PrimaryKey
-    var id: Int,
+    @PrimaryKey(autoGenerate = false) var id: Int,
     var name: String,
-    var year: String,
+    var year: Int,
     var type: Int
 )
 

@@ -6,8 +6,7 @@ import ru.kondrashen.attendanciescoutapp.repository.data_class.Group
 import ru.kondrashen.attendanciescoutapp.repository.data_class.Student
 
 data class GroupWithStudents(
-    @Embedded
-    val group: Group,
+    @Embedded val group: Group,
     @Relation(
         parentColumn = "id",
         entityColumn = "groupId",
