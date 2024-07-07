@@ -16,7 +16,27 @@
     <string name="o_groups">Очная форма обучения</string>
     <string name="z_groups">Заочная форма обучения</string>
     <string name="oz_groups">Очно-заочная форма обучения</string>
-    <string name="student_in">Студенты группы</string>
+    <string name="student_in">Список студентов</string>
     <string name="date_chose">Выбрать дату</string>
     <string name="add_data">Отправить данные</string>
+    <string name="show_data">Посмотреть график посещаемости</string>
+    <string name="filter_data">Отфильтровать</string>
+    <string name="date_info">Выберите дату для добавления посещаемости:</string>
+    <string name="stud_FIO_text">ФИО студента:</string>
+    <string name="stud_phone_text">Телефон:</string>
+    <string name="stud_email_text">Почта:</string>
+
+    <string name="group_name_text">Группа:</string>
+    <string name="year_text">Год обучения:</string>
+    <string name="bad_attendance_count_label">Кол-во пропусков:</string>
+    <string name="stud_file_label">Файлы по студенту</string>
+    <string name="add_file">Добавить документ</string>
+    <string name="delete_data">Удалить</string>
+    <string name="chose_doc">Выбрать документ</string>
+    <string name="start_date">Дата начала</string>
+    <string name="end_date">Дата окончания:</string>
+    <string name="file_info">Выберите документ и назначти даты его действия</string>
+    <string name="chosed_doc">Выбранный документ</string>
+    <string name="doc_name">Наименование документа</string>
+    <string name="hintName">Введите название</string>
 </resources>

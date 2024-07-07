@@ -6,8 +6,8 @@
     android:paddingBottom="5dp"
     android:shape="rectangle" >
 
-    <stroke android:width="2dp" android:color="@color/colorPrimary"/>
-    <solid android:color="@color/colorPrimaryLight"/>
+    <stroke android:width="2dp" android:color="?colorPrimaryUltraDark"/>
+    <solid android:color="?colorPrimaryLight"/>
 
     <corners
         android:bottomLeftRadius="5dp"

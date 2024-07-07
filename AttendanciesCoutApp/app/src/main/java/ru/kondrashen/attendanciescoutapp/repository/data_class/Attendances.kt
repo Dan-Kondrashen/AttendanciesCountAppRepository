@@ -11,10 +11,9 @@ import java.util.Date
 data class Attendances(
     @PrimaryKey
     var id: Int,
-    var subId: Int,
-    var studId: Int,
+    var subjectId: Int,
+    var studentId: Int,
     var userId: Int,
-    var status: String,
-    @TypeConverters(DateConverter::class)
-    var date: Date
+    var statys: String,
+    var datetime: String
 )

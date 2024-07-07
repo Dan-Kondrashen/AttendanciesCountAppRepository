@@ -27,6 +27,8 @@
 
     <CheckBox
         android:id="@+id/list_item_check_here_or_not_text_view"
+
+        android:theme="@style/custom_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

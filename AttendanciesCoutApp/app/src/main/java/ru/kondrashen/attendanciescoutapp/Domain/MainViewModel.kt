@@ -5,13 +5,18 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import ru.kondrashen.attendanciescoutapp.repository.GroupRepository
 import ru.kondrashen.attendanciescoutapp.repository.data_class.AddAttendances
+import ru.kondrashen.attendanciescoutapp.repository.data_class.Attendances
 import ru.kondrashen.attendanciescoutapp.repository.data_class.AttendanciesDatabase
 import ru.kondrashen.attendanciescoutapp.repository.data_class.Group
-import ru.kondrashen.attendanciescoutapp.repository.data_class.responces.LoginResponse
 import ru.kondrashen.attendanciescoutapp.repository.data_class.Student
+import ru.kondrashen.attendanciescoutapp.repository.data_class.StudentAttendanceCount
 import ru.kondrashen.attendanciescoutapp.repository.data_class.relations.GroupWithSubjects
+import ru.kondrashen.attendanciescoutapp.repository.data_class.relations.StudentInGroup
+import ru.kondrashen.attendanciescoutapp.repository.data_class.relations.StudentsWithAttendancies
 import ru.kondrashen.attendanciescoutapp.repository.data_class.responces.AddAttendancesResponse
 
 //open class MainViewModel: ViewModel() {
@@ -32,6 +37,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private var groupZ: LiveData<List<Group>>
     private var groupOZ: LiveData<List<Group>>
     private var students: LiveData<List<Student>>
+    private var attendances: LiveData<List<Attendances>>
+    private var studAttendances: LiveData<List<StudentAttendanceCount>>
     private val pref = application.getSharedPreferences("AuthPref", Context.MODE_PRIVATE)
     private val token = pref.getString("token", null)
 
@@ -43,6 +50,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         groupZ = groupDAO.getGroupsZ()
         groupOZ = groupDAO.getGroupsOZ()
         students = groupDAO.getAllStudents()
+        attendances = groupDAO.getAllAttendances()
+        studAttendances = groupDAO.getAttendancesOfStudents()
 
     }
 
@@ -54,15 +63,32 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun getGroupsZ(): LiveData<List<Group>> {
         return groupZ
     }
+    fun getAdminAttendance(): LiveData<List<StudentAttendanceCount>> {
+        return studAttendances
+    }
     fun getGroupsOZ(): LiveData<List<Group>> {
         return groupOZ
     }
 
+    fun getSubjectsId(name: String): LiveData<Int> {
+        return grRepository.getSubjectId(name)
+    }
+
+    fun getAdminStartDataServ(): LiveData<List<StudentAttendanceCount>>{
+        val token = pref.getString("token", null)
+        studAttendances = grRepository.getAdminData(token)
+        return studAttendances
+    }
     fun getGroupsOServ(id: Int): LiveData<List<Group>>{
 
         val token = pref.getString("token", null)
         groupO = grRepository.getGroupsOData(token, id)
         return groupO
+    }
+    fun getAttendGroupInfoFromServer(id: Int): LiveData<List<Attendances>>{
+        val token = pref.getString("token", null)
+        attendances = grRepository.getAllAttendancesData(token, id)
+        return attendances
     }
 
 //    fun getGroupsZServ(id: Int): LiveData<List<Group>>{
@@ -73,16 +99,26 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun postAttendance(attendances: List<AddAttendances>, userId: Int): AddAttendancesResponse {
         return grRepository.postAttendanceToServ(token, attendances, userId)
     }
+    fun postDocument(addStudFile: MultipartBody.Part,name: RequestBody, date1: RequestBody, date2: RequestBody, studId: Int): AddAttendancesResponse{
+        return grRepository.postStudFileToServ(token, name, date1,date2, addStudFile, studId)
+    }
     fun getStudentsInRoom(id: Int): LiveData<List<Student>>{
         return grRepository.getStudentsByGroupId(id)
+    }
+    fun getStudentsInRoomStatic(id: Int): List<Student>{
+        return grRepository.getStudentsByGroupIdStatic(id)
+    }
+    fun getStudentInfo(studId: Int): LiveData<StudentInGroup>{
+        return grRepository.getCurStudent(studId)
+    }
+    fun countStudentAttend(studId: Int, subId: Int, status: String): Int {
+        return grRepository.getStudentsCountAttend(studId, subId, status)
     }
     fun getSubjectsInRoom(id: Int): LiveData<List<GroupWithSubjects>>{
         return grRepository.getSubjectsByGroupId(id)
     }
-
-    fun getAllStudentsFromServer(id: Int): LiveData<List<Student>>{
-        val token = pref.getString("token", null)
-        return grRepository.getAllStudentsData(token, id)
+    fun getAttendancesInRoom(id: Int): LiveData<List<StudentsWithAttendancies>>{
+        return grRepository.getAttendancesByGroupId(id)
     }
 }
 //    fun getData() {

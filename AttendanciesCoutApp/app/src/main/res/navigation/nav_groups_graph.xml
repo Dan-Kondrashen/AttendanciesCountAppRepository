@@ -34,6 +34,8 @@
         <action
             android:id="@+id/action_SecondFragment_to_StudentFragment"
             app:destination="@id/StudentFragment" />
+        <argument android:name="id"
+            app:argType="integer"/>
 
     </fragment>
     <fragment android:id="@+id/ThirdFragment"
@@ -53,6 +55,18 @@
     <fragment android:id="@+id/StudentFragment"
         android:name="ru.kondrashen.attendanciescoutapp.Presentation.fragments.StudentsListFragment"
         tools:layout="@layout/list_students_in_group">
+        <argument android:name="id"
+            app:argType="integer"/>
+        <argument
+            android:name="groupId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_StudentFragment_to_GraphFragment"
+            app:destination="@id/GraphFragment" />
+    </fragment>
+    <fragment android:id="@+id/GraphFragment"
+        android:name="ru.kondrashen.attendanciescoutapp.Presentation.fragments.GraphFragmentForPrepod"
+        tools:layout="@layout/group_attendancies_graph">
         <argument android:name="id"
             app:argType="integer"/>
         <argument

@@ -22,6 +22,7 @@ class LoginViewModel(application: Application): AndroidViewModel(application) {
         roleRepository = AuthRepository(roleDAO)
         role = roleDAO.getRoleForDropDown()
 
+
     }
 
     fun getRolesFromServer(): LiveData<List<String>>{
@@ -31,6 +32,10 @@ class LoginViewModel(application: Application): AndroidViewModel(application) {
 
     fun getRolesFromRoom(): LiveData<List<String>>{
         return role
+    }
+
+    fun clearDatabase(){
+        roleRepository.clearUserData()
     }
 
     fun getRolesId(name: String): LiveData<Int> {
