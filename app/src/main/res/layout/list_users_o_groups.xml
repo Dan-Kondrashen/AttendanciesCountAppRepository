@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/header_buttons"
+        >
+
+        <Button
+            android:id="@+id/o_group"
+            android:layout_width="130dp"
+            android:background="@drawable/btn_header_pressed"
+            android:layout_height="match_parent"
+            android:text="@string/o_groups"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/z_group"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:text="@string/z_groups"
+            android:background="@drawable/btn_header"
+            app:layout_constraintEnd_toStartOf="@+id/oz_group"
+            app:layout_constraintStart_toEndOf="@+id/o_group" />
+
+        <Button
+            android:id="@+id/oz_group"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:text="@string/oz_groups"
+            android:background="@drawable/btn_header"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@id/group_text_view"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/o_groups"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/header_buttons"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:id="@+id/list_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/group_text_view"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/info_dop"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/list_group"/>
+
+
+
+</RelativeLayout>
